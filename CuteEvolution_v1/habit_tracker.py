@@ -1,10 +1,6 @@
-# Compatibility between Python 2 and Python 3
-try:
-    input = raw_input
-except NameError:
-    pass
+# Global set to store habits
+habits = set()
 
-# Habit Tracker v1.0
 def main():
     while True:
         print("\nHabit Tracker - Version 1.0")
@@ -12,7 +8,29 @@ def main():
         print("2. View all habits")
         print("3. Exit")
         choice = input("Choose an option: ")
-        break  # Temporary exit to test menu display & functionality
+
+        if choice == "1":
+            habit = input("Enter a habit: ").strip()
+            if habit:
+                if habit in habits:
+                    print("'%s' is already in your habits list!" % habit)
+                else:
+                    habits.add(habit)
+                    print("'%s' has been added to your habits." % habit)
+            else:
+                print("Please enter a valid habit.")
+        elif choice == "2":
+            if habits:
+                print("\nYour habits:")
+                for habit in habits:
+                    print("- %s" % habit)
+            else:
+                print("You haven't added any habits yet.")
+        elif choice == "3":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
 
 if __name__ == "__main__":
     main()
